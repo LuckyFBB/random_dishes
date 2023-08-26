@@ -9,5 +9,12 @@ export default defineConfig({
         { path: "/select", component: "select" },
         { path: "/add", component: "add" },
     ],
+    proxy: {
+        "/api": {
+            target: "http://localhost:3000/",
+            changeOrigin: true,
+            pathRewrite: { "^/api": "" },
+        },
+    },
     npmClient: "pnpm",
 });

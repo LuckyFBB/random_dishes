@@ -1,15 +1,36 @@
-import { Form, Input, Select } from "antd";
+import { Form, Input, Select, message } from "antd";
 import selectStyles from "../select/index.less";
 import styles from "./index.less";
+import DishesApi from "@/api/dishes";
+import CatalogApi from "@/api/catalog";
+import { useEffect, useState } from "react";
+import { ICatalog, SUCCUSS_CODE } from "@/constants";
 
 const Option = Select.Option;
 
 const Add = () => {
     const [form] = Form.useForm();
+    const [catalogList, setCatalogList] = useState<ICatalog[]>([]);
 
     const handleAdd = () => {
         const values = form.getFieldsValue();
+        DishesApi.addDishes({ ...values }).then((res) => {
+            if (res.code !== SUCCUSS_CODE) return message.error(res.msg);
+            message.success(res.msg);
+            form.resetFields();
+        });
     };
+
+    const queryCatalogList = async () => {
+        CatalogApi.queryCatalogList({}).then((res) => {
+            if (res.code !== SUCCUSS_CODE) setCatalogList(res.data ?? []);
+        });
+    };
+
+    useEffect(() => {
+        queryCatalogList();
+    }, []);
+
     return (
         <div className={selectStyles.container}>
             <span className={selectStyles.title}>添加菜品 🍝 </span>
@@ -21,12 +42,17 @@ const Add = () => {
                             allowClear
                             className={styles.select}
                         >
-                            <Option value={1}>蔬菜 🥬</Option>
-                            <Option value={2}>肉品 🥩</Option>
-                            <Option value={3}>汤品 🥣</Option>
+                            {catalogList.map((item) => (
+                                <Option
+                                    value={item.catalog_id}
+                                    key={item.catalog_id}
+                                >
+                                    {item.catalog_emoji} {item.catalog_name}
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item name="vegetable">
+                    <Form.Item name="dishName">
                         <Input placeholder="请输入菜品名称" />
                     </Form.Item>
                 </Form>
