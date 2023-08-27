@@ -1,16 +1,13 @@
-import { Form, Input, Select, message } from "antd";
+import { Form, Input, message } from "antd";
 import selectStyles from "../select/index.less";
 import styles from "./index.less";
 import DishesApi from "@/api/dishes";
-import CatalogApi from "@/api/catalog";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ICatalog, SUCCUSS_CODE } from "@/constants";
-
-const Option = Select.Option;
+import SelectCatalog from "@/components/selectCatalog";
 
 const Add = () => {
     const [form] = Form.useForm();
-    const [catalogList, setCatalogList] = useState<ICatalog[]>([]);
 
     const handleAdd = () => {
         const values = form.getFieldsValue();
@@ -21,36 +18,13 @@ const Add = () => {
         });
     };
 
-    const queryCatalogList = async () => {
-        CatalogApi.queryCatalogList({}).then((res) => {
-            if (res.code !== SUCCUSS_CODE) setCatalogList(res.data ?? []);
-        });
-    };
-
-    useEffect(() => {
-        queryCatalogList();
-    }, []);
-
     return (
         <div className={selectStyles.container}>
             <span className={selectStyles.title}>添加菜品 🍝 </span>
             <div className={styles.container}>
                 <Form form={form}>
                     <Form.Item name="catalog">
-                        <Select
-                            placeholder="请选择菜品类别"
-                            allowClear
-                            className={styles.select}
-                        >
-                            {catalogList.map((item) => (
-                                <Option
-                                    value={item.catalog_id}
-                                    key={item.catalog_id}
-                                >
-                                    {item.catalog_emoji} {item.catalog_name}
-                                </Option>
-                            ))}
-                        </Select>
+                        <SelectCatalog />
                     </Form.Item>
                     <Form.Item name="dishName">
                         <Input placeholder="请输入菜品名称" />
