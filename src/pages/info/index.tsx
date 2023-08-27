@@ -4,22 +4,24 @@ import styles from "./index.less";
 import MyDishes from "./components/myDishes";
 import { useState } from "react";
 import MyCatalog from "./components/myCatalog";
+import { TYPE } from "@/constants";
 
 const Info = () => {
     const items: TabsProps["items"] = [
         {
-            key: "dishes",
+            key: TYPE.DISHES,
             label: "菜品列表",
             children: <MyDishes />,
         },
         {
-            key: "catalog",
+            key: TYPE.CATALOG,
             label: "菜品分类",
             children: <MyDishes />,
         },
     ];
 
-    const [activeKey, setActiveKey] = useState("dishes");
+    const [activeKey, setActiveKey] = useState(TYPE.DISHES);
+
     return (
         <div className={`${selectStyles.container}`}>
             <span className={selectStyles.title}>菜品信息 💃 </span>
@@ -31,16 +33,17 @@ const Info = () => {
                                 item.key === activeKey && styles.active
                             }`}
                             onClick={() => {
-                                setActiveKey(item.key);
+                                setActiveKey(item.key as TYPE);
                             }}
+                            key={item.key}
                         >
                             {item.label}
                         </div>
                     ))}
                 </div>
                 <div className={styles.content}>
-                    {activeKey === "dishes" && <MyDishes />}
-                    {activeKey === "catalog" && <MyCatalog />}
+                    {activeKey === TYPE.DISHES && <MyDishes />}
+                    {activeKey === TYPE.CATALOG && <MyCatalog />}
                 </div>
             </div>
         </div>

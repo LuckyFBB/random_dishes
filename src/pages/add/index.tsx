@@ -10,6 +10,9 @@ const Add = () => {
 
     const handleAdd = () => {
         const values = form.getFieldsValue();
+        if (!values.dishName) return message.error("菜品名字不可为空");
+        if (!values.dishName.match(/[\u4e00-\u9fa5]+/g))
+            return message.error("菜品名字应为中文");
         DishesApi.addDishes({ ...values }).then((res) => {
             if (res.code !== SUCCUSS_CODE) return message.error(res.msg);
             message.success(res.msg);
@@ -26,7 +29,10 @@ const Add = () => {
                         <SelectCatalog />
                     </Form.Item>
                     <Form.Item name="dishName">
-                        <Input placeholder="请输入菜品名称" />
+                        <Input
+                            placeholder="请输入菜品名称"
+                            autoComplete="off"
+                        />
                     </Form.Item>
                 </Form>
                 <div className={styles.button} onClick={handleAdd}>

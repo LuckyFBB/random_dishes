@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import DishesApi from "@/api/dishes";
 import { IDishes, SUCCUSS_CODE } from "@/constants";
+import DishesItem from "@/components/dishesItem";
 
 const MyDishes = () => {
     const [list, setList] = useState<IDishes[]>([]);
@@ -18,14 +19,13 @@ const MyDishes = () => {
 
     return (
         <div>
-            {list.map((item) => {
-                return (
-                    <div key={item.id}>
-                        {item.catalog_emoji}
-                        {item?.dish_name}
-                    </div>
-                );
-            })}
+            {list.map((item) => (
+                <DishesItem
+                    key={item.id}
+                    emoji={item?.catalog_emoji || ""}
+                    name={item?.dish_name}
+                />
+            ))}
         </div>
     );
 };

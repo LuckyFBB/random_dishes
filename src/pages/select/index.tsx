@@ -3,8 +3,9 @@ import styles from "./index.less";
 import { useState } from "react";
 import Button from "@/components/button";
 import SelectCatalog from "@/components/selectCatalog";
-import { ICatalog, SUCCUSS_CODE } from "@/constants";
+import { ICatalog, SUCCUSS_CODE, TYPE } from "@/constants";
 import DishesApi from "@/api/dishes";
+import DishesItem from "@/components/dishesItem";
 
 export interface IAddRandom {
     catalogId: number;
@@ -88,10 +89,11 @@ const Random = () => {
                                     key={catalog?.catalog_id}
                                     className={styles.item}
                                 >
-                                    <span>{catalog?.catalog_emoji}</span>
-                                    <span className={styles.name}>
-                                        {catalog?.catalog_name}
-                                    </span>
+                                    <DishesItem
+                                        emoji={catalog?.catalog_emoji || ""}
+                                        name={catalog?.catalog_name || ""}
+                                        type={TYPE.CATALOG}
+                                    />
                                     <span className={styles.number}>
                                         {item.number}
                                     </span>
@@ -113,18 +115,13 @@ const Random = () => {
                     )}
                     {!!randomList.length && (
                         <div className={styles.list}>
-                            {randomList?.map((item) => {
-                                return (
-                                    <div key={item?.id} className={styles.item}>
-                                        <span className={styles.emoji}>
-                                            {item?.catalog_emoji}
-                                        </span>
-                                        <span className={styles.name}>
-                                            {item?.dish_name}
-                                        </span>
-                                    </div>
-                                );
-                            })}
+                            {randomList?.map((item) => (
+                                <DishesItem
+                                    key={item?.id}
+                                    emoji={item?.catalog_emoji}
+                                    name={item?.dish_name}
+                                />
+                            ))}
                         </div>
                     )}
                 </div>

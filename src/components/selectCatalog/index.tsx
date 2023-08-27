@@ -34,6 +34,7 @@ const SelectCatalog = (props: {
                 onChange?.(value);
                 handleChange?.();
             }}
+            optionLabelProp="children"
         >
             {catalogList.map((item) => (
                 <Option value={item.catalog_id} key={item.catalog_id}>

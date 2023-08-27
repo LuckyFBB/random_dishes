@@ -12,3 +12,8 @@ export interface IDishes {
 }
 
 export const SUCCUSS_CODE = 1;
+
+export enum TYPE {
+    DISHES = "DISHES",
+    CATALOG = "CATALOG",
+}

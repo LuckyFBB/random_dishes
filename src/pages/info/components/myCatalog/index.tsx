@@ -1,4 +1,5 @@
 import CatalogApi from "@/api/catalog";
+import DishesItem from "@/components/dishesItem";
 import { ICatalog, SUCCUSS_CODE } from "@/constants";
 import { Select } from "antd";
 import { useEffect, useState } from "react";
@@ -19,14 +20,14 @@ const MyCatalog = () => {
 
     return (
         <div>
-            {catalogList.map((catalog) => {
-                return (
-                    <div>
-                        {catalog.catalog_emoji}
-                        {catalog.catalog_name}
-                    </div>
-                );
-            })}
+            {catalogList.map((catalog) => (
+                <DishesItem
+                    key={catalog.catalog_id}
+                    emoji={catalog?.catalog_emoji || ""}
+                    name={catalog?.catalog_name}
+                    type="catalog"
+                />
+            ))}
         </div>
     );
 };
