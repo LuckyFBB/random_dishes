@@ -1,14 +1,13 @@
 import CatalogApi from "@/api/catalog";
 import DishesItem from "@/components/dishesItem";
-import { ICatalog, SUCCUSS_CODE } from "@/constants";
-import { Select } from "antd";
+import { ICatalog, SUCCUSS_CODE, TYPE } from "@/constants";
 import { useEffect, useState } from "react";
 
 const MyCatalog = () => {
     const [catalogList, setCatalogList] = useState<ICatalog[]>([]);
 
     const queryCatalogList = async () => {
-        CatalogApi.queryCatalogList({}).then((res) => {
+        CatalogApi.queryCatalogList().then((res) => {
             if (res.code !== SUCCUSS_CODE) return;
             setCatalogList(res.data ?? []);
         });
@@ -25,7 +24,7 @@ const MyCatalog = () => {
                     key={catalog.catalog_id}
                     emoji={catalog?.catalog_emoji || ""}
                     name={catalog?.catalog_name}
-                    type="catalog"
+                    type={TYPE.CATALOG}
                 />
             ))}
         </div>

@@ -1,7 +1,7 @@
 import { HttpInterface } from "./interface";
 
 class Http implements HttpInterface {
-    public post<R, P = {}>(url: string, body?: P): Promise<R> {
+    public post<R, P = any>(url: string, body?: P): Promise<R> {
         const opts: RequestInit = {
             method: "POST",
             headers: { "content-type": "application/json;charset=UTF-8" },
@@ -19,7 +19,9 @@ class Http implements HttpInterface {
                 return response.json();
             })
 
-            .catch((err: any) => {});
+            .catch((err: any) => {
+                console.log(err);
+            });
     }
 }
 export default new Http();

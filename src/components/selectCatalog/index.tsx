@@ -14,7 +14,7 @@ const SelectCatalog = (props: {
     const [catalogList, setCatalogList] = useState<ICatalog[]>([]);
 
     const queryCatalogList = async () => {
-        CatalogApi.queryCatalogList({}).then((res) => {
+        CatalogApi.queryCatalogList().then((res) => {
             if (res.code !== SUCCUSS_CODE) return;
             setCatalogList(res.data ?? []);
             getCatalog?.(res.data ?? []);

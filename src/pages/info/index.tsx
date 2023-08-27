@@ -1,4 +1,4 @@
-import { Tabs, TabsProps } from "antd";
+import { TabsProps } from "antd";
 import selectStyles from "../select/index.less";
 import styles from "./index.less";
 import MyDishes from "./components/myDishes";

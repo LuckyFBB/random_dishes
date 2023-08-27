@@ -4,7 +4,7 @@ import styles from "./index.less";
 const DishesItem = (props: {
     emoji: string;
     name: string;
-    type?: TYPE.DISHES | TYPE.CATALOG;
+    type?: TYPE.DISHES | TYPE.CATALOG | undefined;
 }) => {
     const { emoji, name, type = TYPE.DISHES } = props;
     return (
