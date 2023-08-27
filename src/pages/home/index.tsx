@@ -12,7 +12,9 @@ const HomePage = () => {
                 <Link to="/add" className={styles.select}>
                     🍝 添加菜品
                 </Link>
-                <div className={styles.select}>💃 我的信息</div>
+                <Link to="/info" className={styles.select}>
+                    💃 菜品信息
+                </Link>
             </div>
         </div>
     );

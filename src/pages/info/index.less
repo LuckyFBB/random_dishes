@@ -1,0 +1,36 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 64px;
+    width: calc(100% - 128px);
+    .tab {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        height: 36px;
+        line-height: 36px;
+        .item {
+            width: 100px;
+            text-align: center;
+            color: #7dac67;
+        }
+        .active {
+            height: 1;
+            position: relative;
+            &::after {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                content: "";
+                height: 2px;
+                width: 100%;
+                background-color: #7dac67;
+            }
+        }
+    }
+    .content {
+        margin-top: 16px;
+    }
+}

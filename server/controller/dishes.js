@@ -50,6 +50,25 @@ class Dishes {
                 ctx.body = body;
             });
     }
+    queryDishesList(ctx) {
+        const sql = `SELECT dishes_catalog.catalog_emoji, temp_dishes.dish_name, temp_dishes.id
+                        FROM (SELECT * FROM dishes) AS temp_dishes
+                        JOIN dishes_catalog
+                        ON temp_dishes.catalog_id = dishes_catalog.catalog_id;
+                    `;
+        return query(sql)
+            .then((data) => {
+                body.data = data;
+                ctx.body = body;
+            })
+            .catch(() => {
+                body.code = 0;
+                body.data = [];
+                body.msg = "查询失败";
+                ctx.body = body;
+                return;
+            });
+    }
 }
 
 module.exports = new Dishes();

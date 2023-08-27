@@ -2,8 +2,7 @@ import { Form, Input, message } from "antd";
 import selectStyles from "../select/index.less";
 import styles from "./index.less";
 import DishesApi from "@/api/dishes";
-import { useState } from "react";
-import { ICatalog, SUCCUSS_CODE } from "@/constants";
+import { SUCCUSS_CODE } from "@/constants";
 import SelectCatalog from "@/components/selectCatalog";
 
 const Add = () => {

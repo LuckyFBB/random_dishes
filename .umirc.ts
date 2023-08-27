@@ -2,12 +2,10 @@ import { defineConfig } from "umi";
 
 export default defineConfig({
     routes: [
-        {
-            path: "/",
-            component: "home",
-        },
+        { path: "/", component: "home" },
         { path: "/select", component: "select" },
         { path: "/add", component: "add" },
+        { path: "/info", component: "info" },
     ],
     proxy: {
         "/api": {

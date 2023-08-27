@@ -14,4 +14,7 @@ export default {
     randomDishes(params: { random: IAddRandom[] }) {
         return http.post<IResponseBody>("/api/dishes/randomDishes", params);
     },
+    queryDishesList() {
+        return http.post<IResponseBody>("/api/dishes/queryDishesList", {});
+    },
 };
